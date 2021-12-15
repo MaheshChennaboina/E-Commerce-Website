@@ -1,13 +1,34 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link ,Route} from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import products from '../products'
-
-const ProductScreen = ({ match }) => {
+import {useState} from "react"
+import CartItem from "../cart/CartItem"
+import axios from "axios"
+const ProductScreen = ({ match },props) => {
+     const[count,setCount] = useState(1)
+     const [cart,setCart]  = useState([{}])
+     const [message,setMessage]=useState()
    const product = products.find(p => p._id === match.params.id)
+const cartHandler = (e)=>{
+    e.preventDefault();
+    setCount(count+1)
+    const product_obj = {
+         'id':product._id,
+         "product":product.name,
+         "price":product.price,
+         "count":count,
+    }
+    const url = 'http://localhost:3002/products'
+    axios.post(url,product_obj)
+    .then((response)=>{
+        setMessage("sucessfully added to cart....")
+    })
+}
     return (
-        <>
+        <> 
+           {message}
             <Link className='btn btn-dark my-3' to='/'>Go Back</Link>
             <Row>
                 <Col md={6}>
@@ -49,7 +70,7 @@ const ProductScreen = ({ match }) => {
                             </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                <Button className='btn-block' type='button' disabled={product.countInStock ===0}>
+                                <Button className='btn-block' type='button' disabled={product.countInStock} onClick={cartHandler } >
                                     Add To Cart
                                 </Button>
                             </ListGroup.Item>
