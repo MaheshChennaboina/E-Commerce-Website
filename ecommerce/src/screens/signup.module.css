@@ -30,3 +30,6 @@ input:focus{
     background-color: black;
     color: white;
 }
+h1{
+    margin: 10px;
+}

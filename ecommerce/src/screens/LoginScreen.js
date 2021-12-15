@@ -1,16 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router , Route,Link, Switch } from "react-router-dom";
-import SignUp from './SignUp'
-import {Row, Col } from 'react-bootstrap'
 import loop from './loginscreen.module.css'
-// import { Link } from 'react-router-dom'
-// import { Form, Button, Row, Col } from 'react-bootstrap'
-// import { useDispatch, useSelector } from 'react-redux'
-// import Message from '../components/Message'
-// import Loader from '../components/Loader'
-// import FormContainer from '../components/FormContainer'
-// import { login } from '../actions/userActions'
-
 
 
 const LoginScreen = ()=>{
@@ -24,7 +14,9 @@ const LoginScreen = ()=>{
               <input type='password' placeholder='password'></input>
               <button type='submit' className={loop.btn1}>Sign In</button>
              </form>
-            <h3>New Customer <Link to="/signup" onClick={SignUp}>Register</Link></h3> 
+             <Route>
+            <h3>New Customer ?<Link to="/signup">Register</Link></h3> 
+            </Route>
          
          </div>
          
